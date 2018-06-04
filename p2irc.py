@@ -3,6 +3,8 @@ from pprint import pprint
 from json2html import *
 
 res = {}
+g=[]
+descrip = ['jkjk']
 with open('json_file.json') as f:
     data = json.load(f)
 
@@ -22,17 +24,27 @@ for x in range(len(a)):
                 dict4 = data['p2irc_dev']['mappings']['file']['properties']['file_metadata']['properties']
                 m = list(dict4.keys())
                 for i in range(len(m)):
-                    p.append(m[i])
+                 p.append(m[i])
                 res[a[x]] = p
-            else:
 
+            elif 'doc' in p:
+                dict5 = data['p2irc_dev']['mappings']['file']['properties']['doc']['properties']['file_metadata']['properties']
+                n = list(dict5.keys())
+                for i in range(len(n)):
+                    p.append(n[i])
                 res[a[x]] = p
+
+            else:
+                res[a[x]] = p
+
+
         else:
 
             res[a[x]] = p
     else:
 
-        res[a[x]] = p
+        res[a[x]] = {}
+
 
 with open('p2irc.json', 'w') as outfile:
     s = json.dumps(res)
